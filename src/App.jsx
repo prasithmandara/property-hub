@@ -5,14 +5,23 @@ import propertiesData from "./data/properties.json";
 
 function App() {
   const [filterType, setFilterType] = useState("any");
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
 
-  // Filter properties based on selected type
-  const filteredProperties =
-    filterType === "any"
-      ? propertiesData.properties
-      : propertiesData.properties.filter(
-          (property) => property.type.toLowerCase() === filterType.toLowerCase()
-        );
+  // Filter properties based on type and price range
+  const filteredProperties = propertiesData.properties.filter((property) => {
+    const matchesType =
+      filterType === "any" ||
+      property.type.toLowerCase() === filterType.toLowerCase();
+
+    const matchesMin =
+      minPrice === "" || property.price >= parseInt(minPrice, 10);
+
+    const matchesMax =
+      maxPrice === "" || property.price <= parseInt(maxPrice, 10);
+
+    return matchesType && matchesMin && matchesMax;
+  });
 
   return (
     <div className="app">
@@ -35,9 +44,9 @@ function App() {
       <section className="properties">
         <h2 className="section-title">Available Properties</h2>
 
-        {/* Filter Dropdown */}
+        {/* Filter Bar */}
         <div className="filter-bar">
-          <label htmlFor="typeFilter">Filter by type:</label>
+          <label htmlFor="typeFilter">Type:</label>
           <select
             id="typeFilter"
             value={filterType}
@@ -50,6 +59,24 @@ function App() {
             <option value="Townhouse">Townhouse</option>
             <option value="Bungalow">Bungalow</option>
           </select>
+
+          <label htmlFor="minPrice">Min Price:</label>
+          <input
+            type="number"
+            id="minPrice"
+            value={minPrice}
+            onChange={(e) => setMinPrice(e.target.value)}
+            placeholder="e.g. 300000"
+          />
+
+          <label htmlFor="maxPrice">Max Price:</label>
+          <input
+            type="number"
+            id="maxPrice"
+            value={maxPrice}
+            onChange={(e) => setMaxPrice(e.target.value)}
+            placeholder="e.g. 800000"
+          />
         </div>
 
         <div className="property-list">

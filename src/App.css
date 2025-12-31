@@ -84,6 +84,7 @@ body {
 .filter-bar {
   margin-bottom: 1.5rem;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap: 1rem;
@@ -94,7 +95,8 @@ body {
   color: #333;
 }
 
-.filter-bar select {
+.filter-bar select,
+.filter-bar input {
   padding: 0.5rem 1rem;
   border-radius: 6px;
   border: 1px solid #ccc;
@@ -103,7 +105,8 @@ body {
   transition: border-color 0.3s ease;
 }
 
-.filter-bar select:hover {
+.filter-bar select:hover,
+.filter-bar input:hover {
   border-color: #2575fc;
 }
 
