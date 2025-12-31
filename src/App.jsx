@@ -189,13 +189,15 @@ function App() {
                 <p className="added-date">
                   <strong>Added:</strong> {property.added.day} {property.added.month} {property.added.year}
                 </p>
-                <a href={property.url} className="details-link">View Details</a>
-                <button
-                  className={`fav-btn ${favourites.includes(property.id) ? "active" : ""}`}
-                  onClick={() => toggleFavourite(property.id)}
-                >
-                  {favourites.includes(property.id) ? "♥ Remove Favourite" : "♡ Add Favourite"}
-                </button>
+                <div className="property-actions">
+                  <a href={property.url} className="details-link">View Details</a>
+                  <button
+                    className={`fav-btn ${favourites.includes(property.id) ? "active" : ""}`}
+                    onClick={() => toggleFavourite(property.id)}
+                  >
+                    {favourites.includes(property.id) ? "♥ Favourite" : "♡ Favourite"}
+                  </button>
+                </div>
               </div>
             </div>
           ))}
@@ -220,12 +222,15 @@ function App() {
                     <h3>{property.type} - {property.bedrooms} Bedrooms</h3>
                     <p className="price">£{property.price.toLocaleString()}</p>
                     <p className="location">{property.location}</p>
-                    <button
-                      className="fav-btn active"
-                      onClick={() => toggleFavourite(property.id)}
-                    >
-                      ♥ Remove Favourite
-                    </button>
+                    <div className="property-actions">
+                      <a href={property.url} className="details-link">View Details</a>
+                      <button
+                        className="fav-btn active"
+                        onClick={() => toggleFavourite(property.id)}
+                      >
+                        ♥ Favourite
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))}
