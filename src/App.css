@@ -68,13 +68,6 @@ body {
   display: block;
   border-radius: 12px;
 }
-.filter-bar {
-  margin-bottom: 5rem; 
-}
-
-.property-list {
-  margin-top: 5rem; 
-}
 
 /* Properties Section */
 .properties {
@@ -88,32 +81,31 @@ body {
 }
 
 /* Filter bar styling */
-
 .filter-bar {
-  margin: 1rem auto;
+  margin: 1rem auto 3rem auto; /* spacing below filters */
   display: flex;
-  flex-wrap: nowrap;       
-  justify-content: center; 
+  flex-wrap: nowrap;
+  justify-content: center;
   align-items: center;
-  gap: 0.75rem;            
-  font-size: 0.85rem;     
-  max-width: 100%;         
-  overflow-x: auto;        
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 .filter-bar label {
   font-weight: 500;
   color: #333;
-  font-size: 0.8rem;       
+  font-size: 0.8rem;
 }
 
 .filter-bar select,
 .filter-bar input {
-  padding: 0.3rem 0.5rem;  
+  padding: 0.3rem 0.5rem;
   border-radius: 4px;
   border: 1px solid #ccc;
   font-size: 0.85rem;
-  width: 100px;            
+  width: 100px;
   cursor: pointer;
   transition: border-color 0.3s ease;
 }
@@ -126,13 +118,7 @@ body {
 /* Postcode input styling */
 #postcodeArea {
   text-transform: uppercase;
-  width: 80px;            
-}
-
-
-.filter-bar select:hover,
-.filter-bar input:hover {
-  border-color: #2575fc;
+  width: 80px;
 }
 
 /* Property cards */
@@ -210,4 +196,27 @@ body {
 
 .details-link:hover {
   background: #0bee16;
+}
+
+/* Favourite button */
+.fav-btn {
+  margin-top: 0.5rem;
+  background: transparent;
+  border: 1px solid #2575fc;
+  color: #2575fc;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.fav-btn:hover {
+  background: #2575fc;
+  color: white;
+}
+
+.fav-btn.active {
+  background: #ff4d4d;
+  border-color: #ff4d4d;
+  color: white;
 }

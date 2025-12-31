@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import headerImage from "./assets/house.jpg";
 import propertiesData from "./data/properties.json";
@@ -12,13 +12,36 @@ function App() {
   const [afterDate, setAfterDate] = useState("");
   const [beforeDate, setBeforeDate] = useState("");
   const [postcodeArea, setPostcodeArea] = useState("");
+  const [favourites, setFavourites] = useState([]);
+
+  // Load favourites from localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem("favourites");
+    if (saved) {
+      setFavourites(JSON.parse(saved));
+    }
+  }, []);
+
+  // Save favourites to localStorage
+  useEffect(() => {
+    localStorage.setItem("favourites", JSON.stringify(favourites));
+  }, [favourites]);
 
   // Helper: convert property "added" object to JS Date
   const getPropertyDate = (added) => {
     return new Date(`${added.month} ${added.day}, ${added.year}`);
   };
 
-  // Filter properties based on type, price, bedrooms, date, and postcode
+  // Toggle favourite
+  const toggleFavourite = (propertyId) => {
+    setFavourites((prev) =>
+      prev.includes(propertyId)
+        ? prev.filter((id) => id !== propertyId)
+        : [...prev, propertyId]
+    );
+  };
+
+  // Filter properties
   const filteredProperties = propertiesData.properties.filter((property) => {
     const matchesType =
       filterType === "any" ||
@@ -72,7 +95,7 @@ function App() {
         </ul>
       </nav>
 
-      {/* Header Section with Photo */}
+      {/* Header Section */}
       <header className="header">
         <img src={headerImage} alt="Property" className="header-photo" />
       </header>
@@ -83,12 +106,8 @@ function App() {
 
         {/* Filter Bar */}
         <div className="filter-bar">
-          <label htmlFor="typeFilter">Type:</label>
-          <select
-            id="typeFilter"
-            value={filterType}
-            onChange={(e) => setFilterType(e.target.value)}
-          >
+          <label>Type:</label>
+          <select value={filterType} onChange={(e) => setFilterType(e.target.value)}>
             <option value="any">Any</option>
             <option value="House">House</option>
             <option value="Flat">Flat</option>
@@ -97,59 +116,53 @@ function App() {
             <option value="Bungalow">Bungalow</option>
           </select>
 
-          <label htmlFor="minPrice">Min Price:</label>
+          <label>Min Price:</label>
           <input
             type="number"
-            id="minPrice"
             value={minPrice}
             onChange={(e) => setMinPrice(e.target.value)}
             placeholder="e.g. 300000"
           />
 
-          <label htmlFor="maxPrice">Max Price:</label>
+          <label>Max Price:</label>
           <input
             type="number"
-            id="maxPrice"
             value={maxPrice}
             onChange={(e) => setMaxPrice(e.target.value)}
             placeholder="e.g. 800000"
           />
 
-          <label htmlFor="minBedrooms">Min Bedrooms:</label>
+          <label>Min Bedrooms:</label>
           <input
             type="number"
-            id="minBedrooms"
             value={minBedrooms}
             onChange={(e) => setMinBedrooms(e.target.value)}
             placeholder="e.g. 2"
           />
 
-          <label htmlFor="maxBedrooms">Max Bedrooms:</label>
+          <label>Max Bedrooms:</label>
           <input
             type="number"
-            id="maxBedrooms"
             value={maxBedrooms}
             onChange={(e) => setMaxBedrooms(e.target.value)}
             placeholder="e.g. 4"
           />
 
-          <label htmlFor="afterDate">Added After:</label>
+          <label>Added After:</label>
           <input
             type="date"
-            id="afterDate"
             value={afterDate}
             onChange={(e) => setAfterDate(e.target.value)}
           />
 
-          <label htmlFor="beforeDate">Added Before:</label>
+          <label>Added Before:</label>
           <input
             type="date"
-            id="beforeDate"
             value={beforeDate}
             onChange={(e) => setBeforeDate(e.target.value)}
           />
 
-          <label htmlFor="postcodeArea">Postcode Area:</label>
+          <label>Postcode Area:</label>
           <input
             type="text"
             id="postcodeArea"
@@ -177,11 +190,48 @@ function App() {
                   <strong>Added:</strong> {property.added.day} {property.added.month} {property.added.year}
                 </p>
                 <a href={property.url} className="details-link">View Details</a>
+                <button
+                  className={`fav-btn ${favourites.includes(property.id) ? "active" : ""}`}
+                  onClick={() => toggleFavourite(property.id)}
+                >
+                  {favourites.includes(property.id) ? "♥ Remove Favourite" : "♡ Add Favourite"}
+                </button>
               </div>
             </div>
           ))}
         </div>
       </section>
+
+      {/* Favourites Section */}
+      {favourites.length > 0 && (
+        <section className="properties">
+          <h2 className="section-title">My Favourites</h2>
+          <div className="property-list">
+            {propertiesData.properties
+              .filter((p) => favourites.includes(p.id))
+              .map((property) => (
+                <div key={property.id} className="property-card">
+                  <img
+                    src={`/${property.picture}`}
+                    alt={property.type}
+                    className="property-image"
+                  />
+                  <div className="property-info">
+                    <h3>{property.type} - {property.bedrooms} Bedrooms</h3>
+                    <p className="price">£{property.price.toLocaleString()}</p>
+                    <p className="location">{property.location}</p>
+                    <button
+                      className="fav-btn active"
+                      onClick={() => toggleFavourite(property.id)}
+                    >
+                      ♥ Remove Favourite
+                    </button>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }
