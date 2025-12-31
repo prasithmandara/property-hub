@@ -9,8 +9,15 @@ function App() {
   const [maxPrice, setMaxPrice] = useState("");
   const [minBedrooms, setMinBedrooms] = useState("");
   const [maxBedrooms, setMaxBedrooms] = useState("");
+  const [afterDate, setAfterDate] = useState("");
+  const [beforeDate, setBeforeDate] = useState("");
 
-  // Filter properties based on type, price, and bedrooms
+  // Helper: convert property "added" object to JS Date
+  const getPropertyDate = (added) => {
+    return new Date(`${added.month} ${added.day}, ${added.year}`);
+  };
+
+  // Filter properties based on type, price, bedrooms, and date
   const filteredProperties = propertiesData.properties.filter((property) => {
     const matchesType =
       filterType === "any" ||
@@ -28,12 +35,22 @@ function App() {
     const matchesMaxBedrooms =
       maxBedrooms === "" || property.bedrooms <= parseInt(maxBedrooms, 10);
 
+    const propertyDate = getPropertyDate(property.added);
+
+    const matchesAfterDate =
+      afterDate === "" || propertyDate >= new Date(afterDate);
+
+    const matchesBeforeDate =
+      beforeDate === "" || propertyDate <= new Date(beforeDate);
+
     return (
       matchesType &&
       matchesMinPrice &&
       matchesMaxPrice &&
       matchesMinBedrooms &&
-      matchesMaxBedrooms
+      matchesMaxBedrooms &&
+      matchesAfterDate &&
+      matchesBeforeDate
     );
   });
 
@@ -109,6 +126,22 @@ function App() {
             onChange={(e) => setMaxBedrooms(e.target.value)}
             placeholder="e.g. 4"
           />
+
+          <label htmlFor="afterDate">Added After:</label>
+          <input
+            type="date"
+            id="afterDate"
+            value={afterDate}
+            onChange={(e) => setAfterDate(e.target.value)}
+          />
+
+          <label htmlFor="beforeDate">Added Before:</label>
+          <input
+            type="date"
+            id="beforeDate"
+            value={beforeDate}
+            onChange={(e) => setBeforeDate(e.target.value)}
+          />
         </div>
 
         <div className="property-list">
@@ -125,6 +158,9 @@ function App() {
                 <p className="location">{property.location}</p>
                 <p className="tenure"><strong>Tenure:</strong> {property.tenure}</p>
                 <p className="description">{property.description}</p>
+                <p className="added-date">
+                  <strong>Added:</strong> {property.added.day} {property.added.month} {property.added.year}
+                </p>
                 <a href={property.url} className="details-link">View Details</a>
               </div>
             </div>

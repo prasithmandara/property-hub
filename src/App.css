@@ -168,6 +168,12 @@ body {
   color: #555;
 }
 
+.added-date {
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  color: #666;
+}
+
 .details-link {
   text-decoration: none;
   color: white;
