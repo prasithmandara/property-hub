@@ -80,6 +80,34 @@ body {
   color: #2575fc;
 }
 
+/* Filter bar styling */
+.filter-bar {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.filter-bar label {
+  font-weight: 600;
+  color: #333;
+}
+
+.filter-bar select {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.filter-bar select:hover {
+  border-color: #2575fc;
+}
+
+/* Property cards */
 .property-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));

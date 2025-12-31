@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import headerImage from "./assets/house.jpg";
 import propertiesData from "./data/properties.json";
 
 function App() {
+  const [filterType, setFilterType] = useState("any");
+
+  // Filter properties based on selected type
+  const filteredProperties =
+    filterType === "any"
+      ? propertiesData.properties
+      : propertiesData.properties.filter(
+          (property) => property.type.toLowerCase() === filterType.toLowerCase()
+        );
+
   return (
     <div className="app">
       {/* Navigation Bar */}
@@ -24,11 +34,29 @@ function App() {
       {/* Properties Section */}
       <section className="properties">
         <h2 className="section-title">Available Properties</h2>
+
+        {/* Filter Dropdown */}
+        <div className="filter-bar">
+          <label htmlFor="typeFilter">Filter by type:</label>
+          <select
+            id="typeFilter"
+            value={filterType}
+            onChange={(e) => setFilterType(e.target.value)}
+          >
+            <option value="any">Any</option>
+            <option value="House">House</option>
+            <option value="Flat">Flat</option>
+            <option value="Apartment">Apartment</option>
+            <option value="Townhouse">Townhouse</option>
+            <option value="Bungalow">Bungalow</option>
+          </select>
+        </div>
+
         <div className="property-list">
-          {propertiesData.properties.map((property) => (
+          {filteredProperties.map((property) => (
             <div key={property.id} className="property-card">
               <img
-                src={`/${property.picture}`} 
+                src={`/${property.picture}`}
                 alt={property.type}
                 className="property-image"
               />
