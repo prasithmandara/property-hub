@@ -11,13 +11,14 @@ function App() {
   const [maxBedrooms, setMaxBedrooms] = useState("");
   const [afterDate, setAfterDate] = useState("");
   const [beforeDate, setBeforeDate] = useState("");
+  const [postcodeArea, setPostcodeArea] = useState("");
 
   // Helper: convert property "added" object to JS Date
   const getPropertyDate = (added) => {
     return new Date(`${added.month} ${added.day}, ${added.year}`);
   };
 
-  // Filter properties based on type, price, bedrooms, and date
+  // Filter properties based on type, price, bedrooms, date, and postcode
   const filteredProperties = propertiesData.properties.filter((property) => {
     const matchesType =
       filterType === "any" ||
@@ -43,6 +44,10 @@ function App() {
     const matchesBeforeDate =
       beforeDate === "" || propertyDate <= new Date(beforeDate);
 
+    const matchesPostcode =
+      postcodeArea === "" ||
+      property.location.toUpperCase().startsWith(postcodeArea.toUpperCase());
+
     return (
       matchesType &&
       matchesMinPrice &&
@@ -50,7 +55,8 @@ function App() {
       matchesMinBedrooms &&
       matchesMaxBedrooms &&
       matchesAfterDate &&
-      matchesBeforeDate
+      matchesBeforeDate &&
+      matchesPostcode
     );
   });
 
@@ -141,6 +147,15 @@ function App() {
             id="beforeDate"
             value={beforeDate}
             onChange={(e) => setBeforeDate(e.target.value)}
+          />
+
+          <label htmlFor="postcodeArea">Postcode Area:</label>
+          <input
+            type="text"
+            id="postcodeArea"
+            value={postcodeArea}
+            onChange={(e) => setPostcodeArea(e.target.value)}
+            placeholder="e.g. BR1"
           />
         </div>
 

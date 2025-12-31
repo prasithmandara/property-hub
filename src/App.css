@@ -105,6 +105,13 @@ body {
   transition: border-color 0.3s ease;
 }
 
+/* Postcode input styling */
+#postcodeArea {
+  text-transform: uppercase; /* auto-capitalise postcode input */
+  width: 120px;
+}
+
+
 .filter-bar select:hover,
 .filter-bar input:hover {
   border-color: #2575fc;
