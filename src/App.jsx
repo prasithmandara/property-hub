@@ -7,20 +7,34 @@ function App() {
   const [filterType, setFilterType] = useState("any");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
+  const [minBedrooms, setMinBedrooms] = useState("");
+  const [maxBedrooms, setMaxBedrooms] = useState("");
 
-  // Filter properties based on type and price range
+  // Filter properties based on type, price, and bedrooms
   const filteredProperties = propertiesData.properties.filter((property) => {
     const matchesType =
       filterType === "any" ||
       property.type.toLowerCase() === filterType.toLowerCase();
 
-    const matchesMin =
+    const matchesMinPrice =
       minPrice === "" || property.price >= parseInt(minPrice, 10);
 
-    const matchesMax =
+    const matchesMaxPrice =
       maxPrice === "" || property.price <= parseInt(maxPrice, 10);
 
-    return matchesType && matchesMin && matchesMax;
+    const matchesMinBedrooms =
+      minBedrooms === "" || property.bedrooms >= parseInt(minBedrooms, 10);
+
+    const matchesMaxBedrooms =
+      maxBedrooms === "" || property.bedrooms <= parseInt(maxBedrooms, 10);
+
+    return (
+      matchesType &&
+      matchesMinPrice &&
+      matchesMaxPrice &&
+      matchesMinBedrooms &&
+      matchesMaxBedrooms
+    );
   });
 
   return (
@@ -76,6 +90,24 @@ function App() {
             value={maxPrice}
             onChange={(e) => setMaxPrice(e.target.value)}
             placeholder="e.g. 800000"
+          />
+
+          <label htmlFor="minBedrooms">Min Bedrooms:</label>
+          <input
+            type="number"
+            id="minBedrooms"
+            value={minBedrooms}
+            onChange={(e) => setMinBedrooms(e.target.value)}
+            placeholder="e.g. 2"
+          />
+
+          <label htmlFor="maxBedrooms">Max Bedrooms:</label>
+          <input
+            type="number"
+            id="maxBedrooms"
+            value={maxBedrooms}
+            onChange={(e) => setMaxBedrooms(e.target.value)}
+            placeholder="e.g. 4"
           />
         </div>
 
