@@ -31,5 +31,74 @@
                 "day":14,
                 "year":2022
             }
+        },
+        {
+            "id": "prop3",
+			"type": "Apartment",
+			"bedrooms": 1,
+			"price": 275000,
+			"tenure": "Leasehold",
+			"description": "Modern one bedroom apartment located in the heart of Bromley. Features include open-plan living space, fitted kitchen with integrated appliances, and a private balcony with city views...",
+			"location": "High Street, Bromley BR1",
+			"picture": "images/prop3pic1small.jpg",
+			"url": "properties/prop3.html",
+			"added": {
+				"month": "November", 
+				"day": 5, 
+				"year": 2022 
+			}
+
+		},
+        {
+            "id": "prop4",
+            "type": "House",
+            "bedrooms": 4,
+            "price": 899995,
+            "tenure": "Freehold",
+            "description": "Spacious four bedroom detached family home with large garden and double garage. Includes two reception rooms, modern kitchen/diner, and en-suite master bedroom...",
+            "location": "Sevenoaks Road, Orpington BR6",
+            "picture": "images/prop4pic1small.jpg",
+            "url": "properties/prop4.html",
+            "added": { 
+                "month": "December", 
+                "day": 20, 
+                "year": 2022 
+            }
+        },
+        {
+            "id": "prop5",
+            "type": "Flat",
+            "bedrooms": 3,
+            "price": 525000,
+            "tenure": "Leasehold",
+            "description": "Stylish three bedroom flat with two bathrooms, located close to Orpington station. Benefits from open-plan kitchen/living area, Juliet balcony, and allocated parking space...",
+            "location": "Station Road, Orpington BR6",
+            "picture": "images/prop5pic1small.jpg",
+            "url": "properties/prop5.html",
+            "added": { "month": "January", "day": 8, "year": 2023 }
+        },
+        {
+            "id": "prop6",
+            "type": "Townhouse",
+            "bedrooms": 3,
+            "price": 640000,
+            "tenure": "Freehold",
+            "description": "Contemporary three bedroom townhouse arranged over three floors. Features include modern kitchen, spacious lounge, private garden, and off-street parking...",
+            "location": "Queensway, Petts Wood BR5",
+            "picture": "images/prop6pic1small.jpg",
+            "url": "properties/prop6.html",
+            "added": { "month": "February", "day": 15, "year": 2023 }
+        },
+        {
+            "id": "prop7",
+            "type": "Bungalow",
+            "bedrooms": 2,
+            "price": 450000,
+            "tenure": "Freehold",
+            "description": "Charming two bedroom bungalow with landscaped garden and conservatory. Ideal for downsizers, offering a peaceful setting close to local amenities...",
+            "location": "Chislehurst Road, Orpington BR6",
+            "picture": "images/prop7pic1small.jpg",
+            "url": "properties/prop7.html",
+            "added": { "month": "March", "day": 10, "year": 2023 }
         }
 ]}
