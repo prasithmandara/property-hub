@@ -29,13 +29,18 @@
 			"tenure":"Freehold",
 			"description":"Presented in excellent decorative order throughout is this two double bedroom, two bathroom, garden flat. <br>The modern fitted kitchen is open plan to the living room which boasts solid wooden floors and includes integrated appliances including a dishwasher & a washing machine. This large open plan benefits from bi folding doors onto a secluded private courtyard garden. Both bedrooms are double sized, and the family bathroom boasts a matching three piece suite a shower attachment over the bath. There is also a separate wet room. There are walnut doors throughout and wiring for Sky TV/aerial points in the living room/kitchen and both bedrooms.<br>This apartment being only five years old, is still under a 10 year building guarantee...",
 			"location":"Crofton Road Orpington BR6",
-			"picture":"images/prop2pic1small.jpeg",
+			"images": [
+                "images/prop2pic1.jpeg",
+                "images/prop2pic2.jpeg",
+                "images/prop2pic3.jpeg",
+                "images/prop2pic4.jpeg",
+                "images/prop2pic5.jpeg",
+                "images/prop2pic6.jpeg"
+            ],
+            "floorPlan": "images/prop1floorplan.jpeg",
+            "mapEmbed": "https://www.google.com/maps/embed?...",
 			"url":"properties/prop2.html",
-            "added": {
-                "month":"September",
-                "day":14,
-                "year":2022
-            }
+            "added":"2022-09-14"
         },
         {
             "id": "prop3",
@@ -45,14 +50,18 @@
 			"tenure": "Leasehold",
 			"description": "Modern one bedroom apartment located in the heart of Bromley. Features include open-plan living space, fitted kitchen with integrated appliances, and a private balcony with city views...",
 			"location": "High Street, Bromley BR1",
-			"picture": "images/prop3pic1small.jpeg",
+			"images": [
+                "images/prop3pic1.jpeg",
+                "images/prop3pic2.jpeg",
+                "images/prop3pic3.jpeg",
+                "images/prop3pic4.jpeg",
+                "images/prop3pic5.jpeg",
+                "images/prop3pic6.jpeg"
+            ],
+            "floorPlan": "images/prop1floorplan.jpeg",
+            "mapEmbed": "https://www.google.com/maps/embed?...",
 			"url": "properties/prop3.html",
-			"added": {
-				"month": "November", 
-				"day": 5, 
-				"year": 2022 
-			}
-
+			"added": "2022-11-05"
 		},
         {
             "id": "prop4",
@@ -62,13 +71,18 @@
             "tenure": "Freehold",
             "description": "Spacious four bedroom detached family home with large garden and double garage. Includes two reception rooms, modern kitchen/diner, and en-suite master bedroom...",
             "location": "Sevenoaks Road, Orpington BR6",
-            "picture": "images/prop4pic1small.jpeg",
+            "images": [
+                "images/prop4pic1.jpeg",
+                "images/prop4pic2.jpeg",
+                "images/prop4pic3.jpeg",
+                "images/prop4pic4.jpeg",
+                "images/prop4pic5.jpeg",
+                "images/prop4pic6.jpeg"
+            ],
+            "floorPlan": "images/prop1floorplan.jpeg",
+            "mapEmbed": "https://www.google.com/maps/embed?...",
             "url": "properties/prop4.html",
-            "added": { 
-                "month": "December", 
-                "day": 20, 
-                "year": 2022 
-            }
+            "added": "2022-12-20"
         },
         {
             "id": "prop5",
@@ -78,9 +92,18 @@
             "tenure": "Leasehold",
             "description": "Stylish three bedroom flat with two bathrooms, located close to Orpington station. Benefits from open-plan kitchen/living area, Juliet balcony, and allocated parking space...",
             "location": "Station Road, Orpington BR6",
-            "picture": "images/prop5pic1small.jpeg",
+            "images": [
+                "images/prop5pic1.jpeg",
+                "images/prop5pic2.jpeg",
+                "images/prop5pic3.jpeg",
+                "images/prop5pic4.jpeg",
+                "images/prop5pic5.jpeg",
+                "images/prop5pic6.jpeg"
+            ],
+            "floorPlan": "images/prop1floorplan.jpeg",
+            "mapEmbed": "https://www.google.com/maps/embed?...",
             "url": "properties/prop5.html",
-            "added": { "month": "January", "day": 8, "year": 2023 }
+            "added": "2023-01-08"
         },
         {
             "id": "prop6",
@@ -90,9 +113,18 @@
             "tenure": "Freehold",
             "description": "Contemporary three bedroom townhouse arranged over three floors. Features include modern kitchen, spacious lounge, private garden, and off-street parking...",
             "location": "Queensway, Petts Wood BR5",
-            "picture": "images/prop6pic1small.jpeg",
+            "images": [
+                "images/prop6pic1.jpeg",
+                "images/prop6pic2.jpeg",
+                "images/prop6pic3.jpeg",
+                "images/prop6pic4.jpeg",
+                "images/prop6pic5.jpeg",
+                "images/prop6pic6.jpeg"
+            ],
+            "floorPlan": "images/prop1floorplan.jpeg",
+            "mapEmbed": "https://www.google.com/maps/embed?...",
             "url": "properties/prop6.html",
-            "added": { "month": "February", "day": 15, "year": 2023 }
+            "added": "2022-02-15"
         },
         {
             "id": "prop7",
@@ -102,8 +134,17 @@
             "tenure": "Freehold",
             "description": "Charming two bedroom bungalow with landscaped garden and conservatory. Ideal for downsizers, offering a peaceful setting close to local amenities...",
             "location": "Chislehurst Road, Orpington BR6",
-            "picture": "images/prop7pic1small.jpg",
+            "images": [
+                "images/prop7pic1.jpeg",
+                "images/prop7pic2.jpeg",
+                "images/prop7pic3.jpeg",
+                "images/prop7pic4.jpeg",
+                "images/prop7pic5.jpeg",
+                "images/prop7pic6.jpeg"
+            ],
+            "floorPlan": "images/prop1floorplan.jpeg",
+            "mapEmbed": "https://www.google.com/maps/embed?...",
             "url": "properties/prop7.html",
-            "added": { "month": "March", "day": 10, "year": 2023 }
+            "added": "2023-03-10"
         }
 ]}
