@@ -115,11 +115,11 @@
             "location": "Queensway, Petts Wood BR5",
             "images": [
                 "images/prop6pic1small.jpeg",
-                "images/prop6pic2.jpeg",
-                "images/prop6pic3.jpeg",
-                "images/prop6pic4.jpeg",
-                "images/prop6pic5.jpeg",
-                "images/prop6pic6.jpeg"
+                "images/prop6pic2.png",
+                "images/prop6pic3.png",
+                "images/prop6pic4.png",
+                "images/prop6pic5.png",
+                "images/prop6pic6.png"
             ],
             "floorPlan": "images/prop1floorplan.jpeg",
             "mapEmbed": "https://www.google.com/maps/embed?...",
