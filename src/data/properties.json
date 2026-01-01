@@ -73,11 +73,11 @@
             "location": "Sevenoaks Road, Orpington BR6",
             "images": [
                 "images/prop4pic1small.jpeg",
-                "images/prop4pic2.jpeg",
-                "images/prop4pic3.jpeg",
-                "images/prop4pic4.jpeg",
-                "images/prop4pic5.jpeg",
-                "images/prop4pic6.jpeg"
+                "images/prop4pic2.png",
+                "images/prop4pic3.png",
+                "images/prop4pic4.png",
+                "images/prop4pic5.png",
+                "images/prop4pic6.png"
             ],
             "floorPlan": "images/prop1floorplan.jpeg",
             "mapEmbed": "https://www.google.com/maps/embed?...",
