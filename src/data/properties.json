@@ -31,11 +31,11 @@
 			"location":"Crofton Road Orpington BR6",
 			"images": [
                 "images/prop2pic1small.jpeg",
-                "images/prop2pic2.jpeg",
-                "images/prop2pic3.jpeg",
-                "images/prop2pic4.jpeg",
-                "images/prop2pic5.jpeg",
-                "images/prop2pic6.jpeg"
+                "images/prop2pic2.png",
+                "images/prop2pic3.png",
+                "images/prop2pic4.png",
+                "images/prop2pic5.png",
+                "images/prop2pic6.png"
             ],
             "floorPlan": "images/prop1floorplan.jpeg",
             "mapEmbed": "https://www.google.com/maps/embed?...",
