@@ -136,11 +136,11 @@
             "location": "Chislehurst Road, Orpington BR6",
             "images": [
                 "images/prop7pic1small.jpg",
-                "images/prop7pic2.jpeg",
-                "images/prop7pic3.jpeg",
-                "images/prop7pic4.jpeg",
-                "images/prop7pic5.jpeg",
-                "images/prop7pic6.jpeg"
+                "images/prop7pic2.png",
+                "images/prop7pic3.png",
+                "images/prop7pic4.png",
+                "images/prop7pic5.png",
+                "images/prop7pic6.png"
             ],
             "floorPlan": "images/prop1floorplan.jpeg",
             "mapEmbed": "https://www.google.com/maps/embed?...",
