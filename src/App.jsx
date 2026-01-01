@@ -1,7 +1,89 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
 import headerImage from "./assets/house.jpg";
 import propertiesData from "./data/properties.json";
+
+// Reusable PropertyCard component
+function PropertyCard({ property, isFavourite, toggleFavourite }) {
+  return (
+    <div className="property-card">
+      {/* Image Gallery */}
+      <div className="gallery">
+        {property.images &&
+          property.images.map((img, idx) => (
+            <img key={idx} src={`/${img}`} alt={`${property.type} ${idx + 1}`} />
+          ))}
+      </div>
+
+      <div className="property-info">
+        <h3>
+          {property.type} - {property.bedrooms} Bedrooms
+        </h3>
+        <p className="price">£{property.price.toLocaleString()}</p>
+        <p className="location">{property.location}</p>
+        <p className="tenure">
+          <strong>Tenure:</strong> {property.tenure}
+        </p>
+
+        {/* Tabs for Description, Floor Plan, Map */}
+        <Tabs>
+          <TabList>
+            <Tab>Description</Tab>
+            <Tab>Floor Plan</Tab>
+            <Tab>Map</Tab>
+          </TabList>
+
+          <TabPanel>
+            <p className="description">{property.description}</p>
+          </TabPanel>
+
+          <TabPanel>
+            {property.floorPlan ? (
+              <img
+                src={`/${property.floorPlan}`}
+                alt="Floor Plan"
+                className="floorplan"
+              />
+            ) : (
+              <p>No floor plan available.</p>
+            )}
+          </TabPanel>
+
+          <TabPanel>
+            {property.mapEmbed ? (
+              <iframe
+                src={property.mapEmbed}
+                width="100%"
+                height="300"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                title="Google Map"
+              ></iframe>
+            ) : (
+              <p>No map available.</p>
+            )}
+          </TabPanel>
+        </Tabs>
+
+        {/* Actions */}
+        <div className="property-actions">
+          <a href={property.url} className="details-link">
+            View Details
+          </a>
+          <button
+            className={`fav-btn ${isFavourite ? "active" : ""}`}
+            onClick={() => toggleFavourite(property.id)}
+          >
+            {isFavourite ? "♥ Favourite" : "♡ Favourite"}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function App() {
   const [filterType, setFilterType] = useState("any");
@@ -29,6 +111,7 @@ function App() {
 
   // Helper: convert property "added" object to JS Date
   const getPropertyDate = (added) => {
+    if (typeof added === "string") return new Date(added);
     return new Date(`${added.month} ${added.day}, ${added.year}`);
   };
 
@@ -89,9 +172,15 @@ function App() {
       <nav className="navbar">
         <h2 className="logo">PROPERTY HUB</h2>
         <ul className="nav-links">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li>
+            <a href="#home">Home</a>
+          </li>
+          <li>
+            <a href="#about">About</a>
+          </li>
+          <li>
+            <a href="#contact">Contact</a>
+          </li>
         </ul>
       </nav>
 
@@ -107,7 +196,10 @@ function App() {
         {/* Filter Bar */}
         <div className="filter-bar">
           <label>Type:</label>
-          <select value={filterType} onChange={(e) => setFilterType(e.target.value)}>
+          <select
+            value={filterType}
+            onChange={(e) => setFilterType(e.target.value)}
+          >
             <option value="any">Any</option>
             <option value="House">House</option>
             <option value="Flat">Flat</option>
@@ -174,32 +266,12 @@ function App() {
 
         <div className="property-list">
           {filteredProperties.map((property) => (
-            <div key={property.id} className="property-card">
-              <img
-                src={`/${property.picture}`}
-                alt={property.type}
-                className="property-image"
-              />
-              <div className="property-info">
-                <h3>{property.type} - {property.bedrooms} Bedrooms</h3>
-                <p className="price">£{property.price.toLocaleString()}</p>
-                <p className="location">{property.location}</p>
-                <p className="tenure"><strong>Tenure:</strong> {property.tenure}</p>
-                <p className="description">{property.description}</p>
-                <p className="added-date">
-                  <strong>Added:</strong> {property.added.day} {property.added.month} {property.added.year}
-                </p>
-                <div className="property-actions">
-                  <a href={property.url} className="details-link">View Details</a>
-                  <button
-                    className={`fav-btn ${favourites.includes(property.id) ? "active" : ""}`}
-                    onClick={() => toggleFavourite(property.id)}
-                  >
-                    {favourites.includes(property.id) ? "♥ Favourite" : "♡ Favourite"}
-                  </button>
-                </div>
-              </div>
-            </div>
+            <PropertyCard
+              key={property.id}
+              property={property}
+              isFavourite={favourites.includes(property.id)}
+              toggleFavourite={toggleFavourite}
+            />
           ))}
         </div>
       </section>
@@ -212,27 +284,12 @@ function App() {
             {propertiesData.properties
               .filter((p) => favourites.includes(p.id))
               .map((property) => (
-                <div key={property.id} className="property-card">
-                  <img
-                    src={`/${property.picture}`}
-                    alt={property.type}
-                    className="property-image"
-                  />
-                  <div className="property-info">
-                    <h3>{property.type} - {property.bedrooms} Bedrooms</h3>
-                    <p className="price">£{property.price.toLocaleString()}</p>
-                    <p className="location">{property.location}</p>
-                    <div className="property-actions">
-                      <a href={property.url} className="details-link">View Details</a>
-                      <button
-                        className="fav-btn active"
-                        onClick={() => toggleFavourite(property.id)}
-                      >
-                        ♥ Favourite
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                <PropertyCard
+                  key={property.id}
+                  property={property}
+                  isFavourite={true}
+                  toggleFavourite={toggleFavourite}
+                />
               ))}
           </div>
         </section>
