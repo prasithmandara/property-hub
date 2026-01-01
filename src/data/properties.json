@@ -94,11 +94,11 @@
             "location": "Station Road, Orpington BR6",
             "images": [
                 "images/prop5pic1small.jpeg",
-                "images/prop5pic2.jpeg",
-                "images/prop5pic3.jpeg",
-                "images/prop5pic4.jpeg",
-                "images/prop5pic5.jpeg",
-                "images/prop5pic6.jpeg"
+                "images/prop5pic2.png",
+                "images/prop5pic3.png",
+                "images/prop5pic4.png",
+                "images/prop5pic5.png",
+                "images/prop5pic6.png"
             ],
             "floorPlan": "images/prop1floorplan.jpeg",
             "mapEmbed": "https://www.google.com/maps/embed?...",
