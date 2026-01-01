@@ -52,11 +52,11 @@
 			"location": "High Street, Bromley BR1",
 			"images": [
                 "images/prop3pic1small.jpeg",
-                "images/prop3pic2.jpeg",
-                "images/prop3pic3.jpeg",
-                "images/prop3pic4.jpeg",
-                "images/prop3pic5.jpeg",
-                "images/prop3pic6.jpeg"
+                "images/prop3pic2.png",
+                "images/prop3pic3.png",
+                "images/prop3pic4.png",
+                "images/prop3pic5.png",
+                "images/prop3pic6.png"
             ],
             "floorPlan": "images/prop1floorplan.jpeg",
             "mapEmbed": "https://www.google.com/maps/embed?...",
