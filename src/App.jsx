@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import "./App.css";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
@@ -12,11 +12,7 @@ function PropertyCard({ property, isFavourite, toggleFavourite }) {
   };
 
   return (
-    <div
-      className="property-card"
-      draggable
-      onDragStart={handleDragStart}
-    >
+    <div className="property-card" draggable onDragStart={handleDragStart}>
       {/* Image Gallery */}
       <div className="gallery">
         {property.images &&
@@ -84,6 +80,7 @@ function PropertyCard({ property, isFavourite, toggleFavourite }) {
           <button
             className={`fav-btn ${isFavourite ? "active" : ""}`}
             onClick={() => toggleFavourite(property.id)}
+            aria-label={isFavourite ? "Remove from favourites" : "Add to favourites"}
           >
             {isFavourite ? "♥ Favourite" : "♡ Favourite"}
           </button>
@@ -146,46 +143,57 @@ function App() {
   };
 
   // Filter properties
-  const filteredProperties = propertiesData.properties.filter((property) => {
-    const matchesType =
-      filterType === "any" ||
-      property.type.toLowerCase() === filterType.toLowerCase();
+  const filteredProperties = useMemo(() => {
+    return propertiesData.properties.filter((property) => {
+      const matchesType =
+        filterType === "any" ||
+        property.type.toLowerCase() === filterType.toLowerCase();
 
-    const matchesMinPrice =
-      minPrice === "" || property.price >= parseInt(minPrice, 10);
+      const matchesMinPrice =
+        minPrice === "" || property.price >= parseInt(minPrice, 10);
 
-    const matchesMaxPrice =
-      maxPrice === "" || property.price <= parseInt(maxPrice, 10);
+      const matchesMaxPrice =
+        maxPrice === "" || property.price <= parseInt(maxPrice, 10);
 
-    const matchesMinBedrooms =
-      minBedrooms === "" || property.bedrooms >= parseInt(minBedrooms, 10);
+      const matchesMinBedrooms =
+        minBedrooms === "" || property.bedrooms >= parseInt(minBedrooms, 10);
 
-    const matchesMaxBedrooms =
-      maxBedrooms === "" || property.bedrooms <= parseInt(maxBedrooms, 10);
+      const matchesMaxBedrooms =
+        maxBedrooms === "" || property.bedrooms <= parseInt(maxBedrooms, 10);
 
-    const propertyDate = getPropertyDate(property.added);
+      const propertyDate = getPropertyDate(property.added);
 
-    const matchesAfterDate =
-      afterDate === "" || propertyDate >= new Date(afterDate);
+      const matchesAfterDate =
+        afterDate === "" || propertyDate >= new Date(afterDate);
 
-    const matchesBeforeDate =
-      beforeDate === "" || propertyDate <= new Date(beforeDate);
+      const matchesBeforeDate =
+        beforeDate === "" || propertyDate <= new Date(beforeDate);
 
-    const matchesPostcode =
-      postcodeArea === "" ||
-      property.location.toUpperCase().startsWith(postcodeArea.toUpperCase());
+      const matchesPostcode =
+        postcodeArea === "" ||
+        property.location.toUpperCase().startsWith(postcodeArea.toUpperCase());
 
-    return (
-      matchesType &&
-      matchesMinPrice &&
-      matchesMaxPrice &&
-      matchesMinBedrooms &&
-      matchesMaxBedrooms &&
-      matchesAfterDate &&
-      matchesBeforeDate &&
-      matchesPostcode
-    );
-  });
+      return (
+        matchesType &&
+        matchesMinPrice &&
+        matchesMaxPrice &&
+        matchesMinBedrooms &&
+        matchesMaxBedrooms &&
+        matchesAfterDate &&
+        matchesBeforeDate &&
+        matchesPostcode
+      );
+    });
+  }, [
+    filterType,
+    minPrice,
+    maxPrice,
+    minBedrooms,
+    maxBedrooms,
+    afterDate,
+    beforeDate,
+    postcodeArea,
+  ]);
 
   return (
     <div className="app">
@@ -193,15 +201,9 @@ function App() {
       <nav className="navbar">
         <h2 className="logo">PROPERTY HUB</h2>
         <ul className="nav-links">
-          <li>
-            <a href="#home">Home</a>
-          </li>
-          <li>
-            <a href="#about">About</a>
-          </li>
-          <li>
-            <a href="#contact">Contact</a>
-          </li>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
 
@@ -217,7 +219,6 @@ function App() {
 
           {/* Filter Bar */}
           <div className="filter-bar">
-            {/* ... all your filter inputs ... */}
             <label>Type:</label>
             <select
               value={filterType}
@@ -230,18 +231,91 @@ function App() {
               <option value="Townhouse">Townhouse</option>
               <option value="Bungalow">Bungalow</option>
             </select>
-            {/* other filters unchanged */}
+
+            <label>Min Price:</label>
+            <input
+              type="number"
+              value={minPrice}
+              onChange={(e) => setMinPrice(e.target.value)}
+              placeholder="e.g. 100000"
+            />
+
+            <label>Max Price:</label>
+            <input
+              type="number"
+              value={maxPrice}
+              onChange={(e) => setMaxPrice(e.target.value)}
+              placeholder="e.g. 500000"
+            />
+
+            <label>Min Bedrooms:</label>
+            <input
+              type="number"
+              value={minBedrooms}
+              onChange={(e) => setMinBedrooms(e.target.value)}
+              placeholder="e.g. 1"
+            />
+
+            <label>Max Bedrooms:</label>
+            <input
+              type="number"
+              value={maxBedrooms}
+              onChange={(e) => setMaxBedrooms(e.target.value)}
+              placeholder="e.g. 5"
+            />
+
+            <label>Added After:</label>
+            <input
+              type="date"
+              value={afterDate}
+              onChange={(e) => setAfterDate(e.target.value)}
+            />
+
+            <label>Added Before:</label>
+            <input
+              type="date"
+              value={beforeDate}
+              onChange={(e) => setBeforeDate(e.target.value)}
+            />
+
+            <label>Postcode Area:</label>
+            <input
+              type="text"
+              value={postcodeArea}
+              onChange={(e) => setPostcodeArea(e.target.value)}
+              placeholder="e.g. SW1"
+            />
+
+            <button
+              className="clear-filters"
+              onClick={() => {
+                setFilterType("any");
+                setMinPrice("");
+                setMaxPrice("");
+                setMinBedrooms("");
+                setMaxBedrooms("");
+                setAfterDate("");
+                setBeforeDate("");
+                setPostcodeArea("");
+              }}
+            >
+              Clear Filters
+            </button>
           </div>
 
           <div className="property-list">
-            {filteredProperties.map((property) => (
-              <PropertyCard
-                key={property.id}
-                property={property}
-                isFavourite={favourites.includes(property.id)}
-                toggleFavourite={toggleFavourite}
-              />
-            ))}
+            {filteredProperties.length === 0 ? (
+              <p className="empty-state">No properties match your filters.</p>
+            ) : (
+              filteredProperties.map((property) => (
+                <PropertyCard
+                  key={property.id}
+                  property={property}
+                  isFavourite={favourites.includes(property.id)}
+                  toggleFavourite={toggleFavourite}
+                />
+              ))
+            )}
           </div>
         </section>
 
@@ -267,6 +341,54 @@ function App() {
           <p className="drag-hint">Drag properties here to add to favourites</p>
         </section>
       </div>
+
+      {/* Footer Section */}
+      <footer className="footer">
+        <div className="footer-content">
+          <div className="footer-section about">
+            <h3>PROPERTY HUB</h3>
+            <p>Your trusted platform for finding the perfect home.</p>
+          </div>
+
+          <div className="footer-section links">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li><a href="#favourites">Favourites</a></li>
+            </ul>
+          </div>
+
+          <div className="footer-section contact">
+            <h4>Contact</h4>
+            <ul>
+              <li>Email: support@propertyhub.example</li>
+              <li>Phone: +44 20 1234 5678</li>
+              <li>Address: 123 High Street, London</li>
+            </ul>
+          </div>
+
+          <div className="footer-section newsletter">
+            <h4>Newsletter</h4>
+            <p>Subscribe for new listings and market updates.</p>
+            <form
+              className="newsletter-form"
+              onSubmit={(e) => {
+                e.preventDefault();
+                alert("Subscribed!");
+              }}
+            >
+              <input type="email" placeholder="Your email" required />
+              <button type="submit">Subscribe</button>
+            </form>
+          </div>
+        </div>
+
+        <div className="footer-bottom">
+          <p>© {new Date().getFullYear()} Property Hub. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 }
