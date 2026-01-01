@@ -6,7 +6,7 @@ import headerImage from "./assets/house.jpg";
 import propertiesData from "./data/properties.json";
 
 // Reusable PropertyCard component
-function PropertyCard({ property, isFavourite, toggleFavourite }) {
+function PropertyCard({ property, isFavourite, toggleFavourite, removeFavourite }) {
   const handleDragStart = (e) => {
     e.dataTransfer.setData("propertyId", property.id);
   };
@@ -84,6 +84,17 @@ function PropertyCard({ property, isFavourite, toggleFavourite }) {
           >
             {isFavourite ? "♥ Favourite" : "♡ Favourite"}
           </button>
+
+          {/* Delete button only in favourites */}
+          {isFavourite && (
+            <button
+              className="delete-btn"
+              onClick={() => removeFavourite(property.id)}
+              aria-label="Remove property from favourites"
+            >
+              ✖ Remove
+            </button>
+          )}
         </div>
       </div>
     </div>
@@ -129,6 +140,16 @@ function App() {
     );
   };
 
+  // Remove favourite explicitly
+  const removeFavourite = (propertyId) => {
+    setFavourites((prev) => prev.filter((id) => id !== propertyId));
+  };
+
+  // Clear all favourites
+  const clearFavourites = () => {
+    setFavourites([]);
+  };
+
   // Handle drop into favourites
   const handleDrop = (e) => {
     e.preventDefault();
@@ -140,6 +161,14 @@ function App() {
 
   const handleDragOver = (e) => {
     e.preventDefault();
+  };
+
+  // Handle drag out of favourites (remove when leaving the favourites area)
+  const handleDragLeave = (e) => {
+    const propertyId = e.dataTransfer.getData("propertyId");
+    if (propertyId && favourites.includes(propertyId)) {
+      removeFavourite(propertyId);
+    }
   };
 
   // Filter properties
@@ -281,6 +310,7 @@ function App() {
             <label>Postcode Area:</label>
             <input
               type="text"
+              id="postcodeArea"
               value={postcodeArea}
               onChange={(e) => setPostcodeArea(e.target.value)}
               placeholder="e.g. SW1"
@@ -313,19 +343,26 @@ function App() {
                   property={property}
                   isFavourite={favourites.includes(property.id)}
                   toggleFavourite={toggleFavourite}
+                  removeFavourite={removeFavourite}
                 />
               ))
             )}
           </div>
         </section>
 
-        {/* Favourites Section with drag-and-drop */}
+        {/* Favourites Section */}
         <section
           className="favourites"
           onDrop={handleDrop}
           onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
         >
           <h2 className="section-title">My Favourites</h2>
+
+          <button className="clear-btn" onClick={clearFavourites}>
+            Clear All Favourites
+          </button>
+
           <div className="property-list">
             {propertiesData.properties
               .filter((p) => favourites.includes(p.id))
@@ -335,6 +372,7 @@ function App() {
                   property={property}
                   isFavourite={true}
                   toggleFavourite={toggleFavourite}
+                  removeFavourite={removeFavourite}
                 />
               ))}
           </div>

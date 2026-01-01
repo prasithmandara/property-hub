@@ -230,7 +230,8 @@ body {
 
 /* Shared button styles */
 .details-link,
-.fav-btn {
+.fav-btn,
+.delete-btn {
   flex: 1;
   text-align: center;
   padding: 0.5rem 0.75rem;
@@ -250,7 +251,8 @@ body {
 
 .details-link:hover {
   background: white;
-  border-color: white;
+  color: #2575fc;
+  border-color: #2575fc;
 }
 
 /* Favourite button */
@@ -272,7 +274,37 @@ body {
   color: white;
 }
 
-/* Footer Styling        */
+/* Delete button */
+.delete-btn {
+  background: #ff4d4d;
+  border: 1px solid #ff4d4d;
+  color: white;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background: #cc0000;
+  border-color: #cc0000;
+}
+
+/* Clear favourites button */
+.clear-btn {
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  background: #2575fc;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.clear-btn:hover {
+  background: greenyellow;
+  color: #222;
+}
+
+/* Footer Styling */
 .footer {
   background: #222;
   color: #eee;
@@ -342,14 +374,15 @@ body {
 }
 
 .newsletter-form button:hover {
-  background:greenyellow;
+  background: greenyellow;
+  color: #222;
 }
 
 .footer-bottom {
   margin-top: 2rem;
   border-top: 1px solid #444;
   padding-top: 1rem;
-  text-align: center; 
+  text-align: center;
 }
 
 .footer-bottom p {
