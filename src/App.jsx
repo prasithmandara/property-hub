@@ -6,7 +6,7 @@ import headerImage from "./assets/house.jpg";
 import propertiesData from "./data/properties.json";
 
 // Reusable PropertyCard component
-function PropertyCard({ property, isFavourite, toggleFavourite, removeFavourite }) {
+function PropertyCard({ property, isFavourite, toggleFavourite, removeFavourite, showDelete }) {
   const handleDragStart = (e) => {
     e.dataTransfer.setData("propertyId", property.id);
   };
@@ -85,8 +85,8 @@ function PropertyCard({ property, isFavourite, toggleFavourite, removeFavourite 
             {isFavourite ? "♥ Favourite" : "♡ Favourite"}
           </button>
 
-          {/* Delete button only in favourites */}
-          {isFavourite && (
+          {/* Delete button only when showDelete is true */}
+          {showDelete && (
             <button
               className="delete-btn"
               onClick={() => removeFavourite(property.id)}
@@ -111,19 +111,13 @@ function App() {
   const [beforeDate, setBeforeDate] = useState("");
   const [postcodeArea, setPostcodeArea] = useState("");
   const [favourites, setFavourites] = useState([]);
+  const [draggedPropertyId, setDraggedPropertyId] = useState(null);
+  const [email, setEmail] = useState("");
 
-  // Load favourites from localStorage
+  // Initialize with empty favourites array
   useEffect(() => {
-    const saved = localStorage.getItem("favourites");
-    if (saved) {
-      setFavourites(JSON.parse(saved));
-    }
+    setFavourites([]);
   }, []);
-
-  // Save favourites to localStorage
-  useEffect(() => {
-    localStorage.setItem("favourites", JSON.stringify(favourites));
-  }, [favourites]);
 
   // Helper: convert property "added" object to JS Date
   const getPropertyDate = (added) => {
@@ -150,25 +144,50 @@ function App() {
     setFavourites([]);
   };
 
-  // Handle drop into favourites
-  const handleDrop = (e) => {
+  // Handle drag start - store the dragged property ID
+  const handleDragStartFromFavourites = (e, propertyId) => {
+    setDraggedPropertyId(propertyId);
+    e.dataTransfer.setData("propertyId", propertyId);
+    e.dataTransfer.effectAllowed = "move";
+  };
+
+  // Handle drop into favourites section
+  const handleDropIntoFavourites = (e) => {
     e.preventDefault();
     const propertyId = e.dataTransfer.getData("propertyId");
     if (propertyId && !favourites.includes(propertyId)) {
       setFavourites((prev) => [...prev, propertyId]);
     }
+    setDraggedPropertyId(null);
   };
 
-  const handleDragOver = (e) => {
+  // Handle drag over favourites section
+  const handleDragOverFavourites = (e) => {
     e.preventDefault();
+    e.dataTransfer.dropEffect = "copy";
   };
 
-  // Handle drag out of favourites (remove when leaving the favourites area)
-  const handleDragLeave = (e) => {
+  // Handle drop outside favourites (remove from favourites)
+  const handleDropOutsideFavourites = (e) => {
+    e.preventDefault();
     const propertyId = e.dataTransfer.getData("propertyId");
     if (propertyId && favourites.includes(propertyId)) {
       removeFavourite(propertyId);
     }
+    setDraggedPropertyId(null);
+  };
+
+  // Handle drag over outside favourites
+  const handleDragOverOutside = (e) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+  };
+
+  // Handle newsletter subscription
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    alert("Subscribed!");
+    setEmail("");
   };
 
   // Filter properties
@@ -241,7 +260,11 @@ function App() {
         <img src={headerImage} alt="Property" className="header-photo" />
       </header>
 
-      <div className="main-content">
+      <div 
+        className="main-content"
+        onDrop={handleDropOutsideFavourites}
+        onDragOver={handleDragOverOutside}
+      >
         {/* Properties Section */}
         <section className="properties">
           <h2 className="section-title">Available Properties</h2>
@@ -344,6 +367,7 @@ function App() {
                   isFavourite={favourites.includes(property.id)}
                   toggleFavourite={toggleFavourite}
                   removeFavourite={removeFavourite}
+                  showDelete={false}
                 />
               ))
             )}
@@ -353,30 +377,64 @@ function App() {
         {/* Favourites Section */}
         <section
           className="favourites"
-          onDrop={handleDrop}
-          onDragOver={handleDragOver}
-          onDragLeave={handleDragLeave}
+          onDrop={handleDropIntoFavourites}
+          onDragOver={handleDragOverFavourites}
+          style={{
+            minHeight: "200px",
+            padding: "2rem",
+            border: draggedPropertyId && favourites.includes(draggedPropertyId) 
+              ? "2px dashed #ff4d4d" 
+              : "2px dashed #2575fc",
+            borderRadius: "8px",
+            backgroundColor: draggedPropertyId && favourites.includes(draggedPropertyId)
+              ? "#ffe6e6"
+              : "#f8f9ff",
+            transition: "all 0.3s ease"
+          }}
         >
           <h2 className="section-title">My Favourites</h2>
 
-          <button className="clear-btn" onClick={clearFavourites}>
-            Clear All Favourites
-          </button>
+          {favourites.length > 0 && (
+            <button className="clear-btn" onClick={clearFavourites}>
+              Clear All Favourites
+            </button>
+          )}
 
           <div className="property-list">
-            {propertiesData.properties
-              .filter((p) => favourites.includes(p.id))
-              .map((property) => (
-                <PropertyCard
-                  key={property.id}
-                  property={property}
-                  isFavourite={true}
-                  toggleFavourite={toggleFavourite}
-                  removeFavourite={removeFavourite}
-                />
-              ))}
+            {favourites.length === 0 ? (
+              <p style={{ textAlign: "center", color: "#666", padding: "2rem" }}>
+                No favourites yet. Drag properties here or click the heart button to add them.
+              </p>
+            ) : (
+              propertiesData.properties
+                .filter((p) => favourites.includes(p.id))
+                .map((property) => (
+                  <div
+                    key={property.id}
+                    draggable
+                    onDragStart={(e) => handleDragStartFromFavourites(e, property.id)}
+                  >
+                    <PropertyCard
+                      property={property}
+                      isFavourite={true}
+                      toggleFavourite={toggleFavourite}
+                      removeFavourite={removeFavourite}
+                      showDelete={true}
+                    />
+                  </div>
+                ))
+            )}
           </div>
-          <p className="drag-hint">Drag properties here to add to favourites</p>
+          
+          <p style={{ 
+            textAlign: "center", 
+            color: "#666", 
+            marginTop: "1rem",
+            fontSize: "0.9rem",
+            fontStyle: "italic"
+          }}>
+            💡 Tip: Drag properties here to add, or drag them out to remove
+          </p>
         </section>
       </div>
 
@@ -410,16 +468,16 @@ function App() {
           <div className="footer-section newsletter">
             <h4>Newsletter</h4>
             <p>Subscribe for new listings and market updates.</p>
-            <form
-              className="newsletter-form"
-              onSubmit={(e) => {
-                e.preventDefault();
-                alert("Subscribed!");
-              }}
-            >
-              <input type="email" placeholder="Your email" required />
-              <button type="submit">Subscribe</button>
-            </form>
+            <div className="newsletter-form">
+              <input 
+                type="email" 
+                placeholder="Your email" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required 
+              />
+              <button onClick={handleSubscribe}>Subscribe</button>
+            </div>
           </div>
         </div>
 
