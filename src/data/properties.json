@@ -18,7 +18,6 @@
             ],
             "floorPlan": "images/prop1floorplan.png",
             "mapEmbed": "https://www.google.com/maps/embed?...",
-			"url":"properties/prop1.html",
             "added": "2022-10-12"
         },
 		{
@@ -27,7 +26,7 @@
             "bedrooms":2,
 			"price":399995,
 			"tenure":"Freehold",
-			"description":"Presented in excellent decorative order throughout is this two double bedroom, two bathroom, garden flat. <br>The modern fitted kitchen is open plan to the living room which boasts solid wooden floors and includes integrated appliances including a dishwasher & a washing machine. This large open plan benefits from bi folding doors onto a secluded private courtyard garden. Both bedrooms are double sized, and the family bathroom boasts a matching three piece suite a shower attachment over the bath. There is also a separate wet room. There are walnut doors throughout and wiring for Sky TV/aerial points in the living room/kitchen and both bedrooms.<br>This apartment being only five years old, is still under a 10 year building guarantee...",
+			"description":"Presented in excellent decorative order throughout is this two double bedroom, two bathroom, garden flat. The modern fitted kitchen is open plan to the living room which boasts solid wooden floors and includes integrated appliances including a dishwasher & a washing machine. This large open plan benefits from bi folding doors onto a secluded private courtyard garden. Both bedrooms are double sized, and the family bathroom boasts a matching three piece suite a shower attachment over the bath. There is also a separate wet room. There are walnut doors throughout and wiring for Sky TV/aerial points in the living room/kitchen and both bedrooms.<br>This apartment being only five years old, is still under a 10 year building guarantee...",
 			"location":"Crofton Road Orpington BR6",
 			"images": [
                 "images/prop2pic1small.jpeg",
@@ -39,16 +38,15 @@
             ],
             "floorPlan": "images/prop2floorplan.png",
             "mapEmbed": "https://www.google.com/maps/embed?...",
-			"url":"properties/prop2.html",
             "added":"2022-09-14"
         },
         {
             "id": "prop3",
 			"type": "Apartment",
-			"bedrooms": 1,
+			"bedrooms": 2,
 			"price": 275000,
 			"tenure": "Leasehold",
-			"description": "Modern one bedroom apartment located in the heart of Bromley. Features include open-plan living space, fitted kitchen with integrated appliances, and a private balcony with city views...",
+			"description": "Modern two-bedroom apartment just minutes from the station and local shops. Features include a spacious open-plan living/dining area, fitted kitchen with breakfast bar, and private balcony. Three well-proportioned bedrooms, family bathroom, and separate WC. Benefits include double glazing, gas central heating, secure entry, and a well-presented interior throughout",
 			"location": "High Street, Bromley BR1",
 			"images": [
                 "images/prop3pic1small.jpeg",
@@ -60,7 +58,6 @@
             ],
             "floorPlan": "images/prop3floorplan.png",
             "mapEmbed": "https://www.google.com/maps/embed?...",
-			"url": "properties/prop3.html",
 			"added": "2022-11-05"
 		},
         {
@@ -69,7 +66,7 @@
             "bedrooms": 4,
             "price": 899995,
             "tenure": "Freehold",
-            "description": "Spacious four bedroom detached family home with large garden and double garage. Includes two reception rooms, modern kitchen/diner, and en-suite master bedroom...",
+            "description": "Spacious four-bedroom freehold family home ideally located close to local shops, schools, and transport links. Features include two reception rooms, modern fitted kitchen, utility room, and private garden. Upstairs offers four well-proportioned bedrooms and a family bathroom. Benefits include double glazing, gas central heating, and a well-presented interior throughout",
             "location": "Sevenoaks Road, Orpington BR6",
             "images": [
                 "images/prop4pic1small.jpeg",
@@ -81,7 +78,6 @@
             ],
             "floorPlan": "images/prop4floorplan.png",
             "mapEmbed": "https://www.google.com/maps/embed?...",
-            "url": "properties/prop4.html",
             "added": "2022-12-20"
         },
         {
@@ -90,7 +86,7 @@
             "bedrooms": 3,
             "price": 525000,
             "tenure": "Leasehold",
-            "description": "Stylish three bedroom flat with two bathrooms, located close to Orpington station. Benefits from open-plan kitchen/living area, Juliet balcony, and allocated parking space...",
+            "description": "Modern three-bedroom leasehold flat conveniently located close to shops, schools, and excellent transport links. Features include a spacious lounge/dining area, fitted kitchen, family bathroom, and three well-proportioned bedrooms. Benefits include double glazing, gas central heating, secure entry system, and a well-presented interior throughout.",
             "location": "Station Road, Orpington BR6",
             "images": [
                 "images/prop5pic1small.jpeg",
@@ -102,7 +98,6 @@
             ],
             "floorPlan": "images/prop5floorplan.png",
             "mapEmbed": "https://www.google.com/maps/embed?...",
-            "url": "properties/prop5.html",
             "added": "2023-01-08"
         },
         {
@@ -111,7 +106,7 @@
             "bedrooms": 3,
             "price": 640000,
             "tenure": "Freehold",
-            "description": "Contemporary three bedroom townhouse arranged over three floors. Features include modern kitchen, spacious lounge, private garden, and off-street parking...",
+            "description": "Stylish three-bedroom freehold townhouse set in a sought-after location close to shops, schools, and transport links. The property offers a spacious lounge, modern fitted kitchen, and private garden. Upstairs features three well-proportioned bedrooms and a family bathroom. Benefits include double glazing, gas central heating, and a well-presented interior throughout",
             "location": "Queensway, Petts Wood BR5",
             "images": [
                 "images/prop6pic1small.jpeg",
@@ -123,16 +118,15 @@
             ],
             "floorPlan": "images/prop6floorplan.png",
             "mapEmbed": "https://www.google.com/maps/embed?...",
-            "url": "properties/prop6.html",
             "added": "2022-02-15"
         },
         {
             "id": "prop7",
             "type": "Bungalow",
-            "bedrooms": 2,
-            "price": 450000,
+            "bedrooms": 8,
+            "price": 950000,
             "tenure": "Freehold",
-            "description": "Charming two bedroom bungalow with landscaped garden and conservatory. Ideal for downsizers, offering a peaceful setting close to local amenities...",
+            "description": "Spacious eight-room freehold bungalow set in a desirable location close to shops, schools, and transport links. The property offers generous living space with multiple reception areas, fitted kitchen, family bathroom, and well-proportioned bedrooms. Benefits include private garden, double glazing, gas central heating, and a well-presented interior throughout",
             "location": "Chislehurst Road, Orpington BR6",
             "images": [
                 "images/prop7pic1small.jpg",
@@ -144,7 +138,6 @@
             ],
             "floorPlan": "images/prop7floorplan.png",
             "mapEmbed": "https://www.google.com/maps/embed?...",
-            "url": "properties/prop7.html",
             "added": "2023-03-10"
         }
 ]}
