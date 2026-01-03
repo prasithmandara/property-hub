@@ -60,7 +60,7 @@ function ImageCarousel({ images, propertyType }) {
         onTouchEnd={handleTouchEnd}
       >
         <img 
-          src={`/${images[currentIndex]}`} 
+          src={images[currentIndex]}
           alt={`${propertyType} ${currentIndex + 1}`}
           className="carousel-image"
         />
@@ -105,7 +105,7 @@ function PropertyCardCompact({ property, removeFavourite }) {
 
   return (
     <div className="property-card-compact" draggable onDragStart={handleDragStart}>
-      <img src={`/${property.images[0]}`} alt={property.type} className="compact-image" />
+      <img src={property.images[0]} alt={property.type} className="compact-image" />
       <div className="compact-info">
         <h4>{property.type} - {property.bedrooms} Bed</h4>
         <p className="compact-price">£{property.price.toLocaleString()}</p>
@@ -149,7 +149,7 @@ function PropertyCard({ property, isFavourite, toggleFavourite, removeFavourite,
 
           <TabPanel>
             {property.floorPlan ? (
-              <img src={`/${property.floorPlan}`} alt="Floor Plan" className="floorplan" />
+              <img src={property.floorPlan} alt="Floor Plan" className="floorplan" />
             ) : (
               <p>No floor plan available.</p>
             )}
